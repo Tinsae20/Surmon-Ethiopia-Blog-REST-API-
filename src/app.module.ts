@@ -6,6 +6,8 @@ import { ConfigModule } from '@nestjs/config';
 import Joi from 'joi';
 import { DatasourceModule } from './datasource/datasource.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { PrismaService } from './prisma/prisma.service';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -17,11 +19,12 @@ import { ScheduleModule } from '@nestjs/schedule';
         DEVTO_BASE_URL: Joi.string().uri().default('https://dev.to/api'),
       }),
     }),
+    PrismaModule,
     DatasourceModule,
     PostsModule,
     ScheduleModule.forRoot(),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
