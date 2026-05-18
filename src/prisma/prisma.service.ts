@@ -10,7 +10,13 @@ export class PrismaService
   implements OnModuleInit, OnModuleDestroy
 {
   constructor() {
-    super({ accelerateUrl: process.env.DATABASE_URL } as any);
+    super({
+      datasources: {
+        db: {
+          url: process.env.DATABASE_URL,
+        },
+      },
+    });
     Object.assign(this, this.$extends(withAccelerate()));
   }
 
