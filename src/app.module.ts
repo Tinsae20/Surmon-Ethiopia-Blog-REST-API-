@@ -8,6 +8,7 @@ import { DatasourceModule } from './datasource/datasource.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
+import { PostModule } from './post/post.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { PrismaModule } from './prisma/prisma.module';
     DatasourceModule,
     PostsModule,
     ScheduleModule.forRoot(),
+    PostModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],
