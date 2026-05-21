@@ -9,6 +9,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { PrismaService } from './prisma/prisma.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { PostModule } from './post/post.module';
+import { TagModule } from './tag/tag.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { PostModule } from './post/post.module';
     PostsModule,
     ScheduleModule.forRoot(),
     PostModule,
+    TagModule,
   ],
   controllers: [AppController],
   providers: [AppService, PrismaService],

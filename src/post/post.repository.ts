@@ -79,11 +79,26 @@ export class PostRepository {
   }
 
   async upsertFromSource(data: UpsertPostData): Promise<Post> {
-    const result = await this.prisma.post.upsert({
-      where: { sourceId: data.sourceId },
-      create: data,
-      update: data,
+    const { tags, ...postData } = data;
+
+    await this.prisma.postTag.deleteMany({
+      where: {
+        post: {
+          sourceId: postData.sourceId,
+        },
+      },
     });
-    return result;
+
+    return await this.prisma.post.upsert({
+      where: { sourceId: postData.sourceId },
+      create: {
+        ...postData,
+        tags,
+      },
+      update: {
+        ...postData,
+        tags,
+      },
+    });
   }
 }
